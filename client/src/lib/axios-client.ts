@@ -16,10 +16,15 @@ API.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const { data, status } = error.response;
+    const response = error.response;
+    const data = response?.data;
+    const status = response?.status;
 
     if (data === "Unauthorized" && status === 401) {
-      window.location.href = "/";
+      const path = window.location.pathname;
+      if (path !== "/" && path !== "/sign-in" && path !== "/sign-up" && path !== "/google/oauth/callback") {
+        window.location.href = "/";
+      }
     }
 
     const customError: CustomError = {

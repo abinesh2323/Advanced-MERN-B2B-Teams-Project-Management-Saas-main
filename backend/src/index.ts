@@ -29,12 +29,20 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+// CORS must come before session/passport so preflight requests are handled correctly
+app.use(
+  cors({
+    origin: config.FRONTEND_ORIGIN,
+    credentials: true,
+  })
+);
+
 app.use(
   session({
     name: "session",
     keys: [config.SESSION_SECRET],
     maxAge: 24 * 60 * 60 * 1000,
-    secure: config.NODE_ENV === "production",
+    secure: config.NODE_ENV === "production", // false on localhost (development)
     httpOnly: true,
     sameSite: "lax",
   })
@@ -42,13 +50,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(
-  cors({
-    origin: config.FRONTEND_ORIGIN,
-    credentials: true,
-  })
-);
 
 app.get(
   `/`,
