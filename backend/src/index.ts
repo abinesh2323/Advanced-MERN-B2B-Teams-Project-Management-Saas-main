@@ -24,7 +24,9 @@ import "dotenv/config";
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
+const isProduction = config.NODE_ENV === "production";
 
+app.set("trust proxy", 1);
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
@@ -42,9 +44,9 @@ app.use(
     name: "session",
     keys: [config.SESSION_SECRET],
     maxAge: 24 * 60 * 60 * 1000,
-    secure: config.NODE_ENV === "production", // false on localhost (development)
+    secure: isProduction,
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: isProduction ? "none" : "lax",
   })
 );
 
