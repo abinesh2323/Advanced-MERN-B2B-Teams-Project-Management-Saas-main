@@ -1,1 +1,1 @@
-export const baseURL = import.meta.env.VITE_API_BASE_URL;
+export const baseURL = "https://advanced-mern-b2b-teams-project-roqm.onrender.com/api";
