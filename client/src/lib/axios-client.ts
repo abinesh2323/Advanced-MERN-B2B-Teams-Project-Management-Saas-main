@@ -1,7 +1,7 @@
 import { CustomError } from "@/types/custom-error.type";
 import axios from "axios";
 
-const baseURL = "https://advanced-mern-b2b-teams-project-roqm.onrender.com/";
+const baseURL = "https://advanced-mern-b2b-teams-project-roqm.onrender.com/api";
 
 const options = {
   baseURL,
