@@ -18,3 +18,4 @@ stages:
 runners:
   nn:
     config-id: 3
+pipeline-runner: nn
