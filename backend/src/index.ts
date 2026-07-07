@@ -33,6 +33,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS must come before session/passport so preflight requests are handled correctly
+const allowedOrigins = [
+  "https://officehubtech.onslate.com",
+  "https://advanced-mern-b2b-te-bojufosh.onslate.com",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
     origin: config.FRONTEND_ORIGIN,
