@@ -2,7 +2,7 @@ import { getEnv } from "../utils/get-env";
 
 const appConfig = () => ({
   NODE_ENV: getEnv("NODE_ENV", "development"),
-  PORT: getEnv("PORT", "8009"),
+  PORT: getEnv("X_ZOHO_CATALYST_LISTEN_PORT", getEnv("PORT", "8009")),
   BASE_PATH: getEnv("BASE_PATH", "/api"),
   MONGO_URI: getEnv("MONGO_URI", "mongodb+srv://abineshk436_db_user:vKyobH7qobTPlVXc@cluster0.nxko1km.mongodb.net/?appName=Cluster0"),
 
