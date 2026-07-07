@@ -10,6 +10,23 @@ import {
 import { Separator } from "./ui/separator";
 import { Link, useLocation } from "react-router-dom";
 import useWorkspaceId from "@/hooks/use-workspace-id";
+import { lazy, Suspense } from "react";
+
+// Lazy-loaded so it only mounts inside authenticated routes
+const LiveTimerWidgetComponent = lazy(
+  () =>
+    import("@/components/workspace/timesheet/LiveTimerWidget").then((m) => ({
+      default: m.LiveTimerWidget,
+    }))
+);
+
+function LiveTimerWidgetLazy() {
+  return (
+    <Suspense fallback={null}>
+      <LiveTimerWidgetComponent />
+    </Suspense>
+  );
+}
 
 const Header = () => {
   const location = useLocation();
@@ -22,6 +39,7 @@ const Header = () => {
     if (pathname.includes("/settings")) return "Settings";
     if (pathname.includes("/tasks")) return "Tasks";
     if (pathname.includes("/members")) return "Members";
+    if (pathname.includes("/timesheet")) return "Timesheet";
     return null; // Default label
   };
 
@@ -57,6 +75,11 @@ const Header = () => {
             )}
           </BreadcrumbList>
         </Breadcrumb>
+      </div>
+
+      {/* Live Timer Widget — shown in header when a timer is running */}
+      <div className="flex items-center pr-4">
+        <LiveTimerWidgetLazy />
       </div>
     </header>
   );

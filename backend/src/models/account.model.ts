@@ -32,11 +32,12 @@ const accountSchema = new Schema<AccountDocument>(
   },
   {
     timestamps: true,
-    toJSON: {
-      transform(doc, ret) {
-        delete ret.refreshToken;
-      },
-    },
+   toJSON: {
+  transform(doc, ret: any) {
+    delete ret.refreshToken;
+    return ret;
+  },
+},
   }
 );
 

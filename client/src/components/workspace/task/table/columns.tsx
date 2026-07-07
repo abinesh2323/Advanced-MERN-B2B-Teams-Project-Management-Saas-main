@@ -19,6 +19,7 @@ import {
 import { priorities, statuses } from "./data";
 import { TaskType } from "@/types/api.type";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { TimerControl } from "@/components/workspace/timesheet/TimerControl";
 
 export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
   const columns: ColumnDef<TaskType>[] = [
@@ -201,6 +202,22 @@ export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
               <span>{priority.label}</span>
             </Badge>
           </div>
+        );
+      },
+    },
+    {
+      id: "timer",
+      header: () => <span className="text-xs text-muted-foreground">Timer</span>,
+      cell: ({ row }) => {
+        const task = row.original;
+        const projectId = task.project?._id;
+        if (!projectId) return null;
+        return (
+          <TimerControl
+            taskId={task._id}
+            projectId={projectId}
+            taskTitle={task.title}
+          />
         );
       },
     },

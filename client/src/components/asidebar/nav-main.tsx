@@ -6,6 +6,7 @@ import {
   Users,
   CheckCircle,
   LayoutDashboard,
+  Clock,
 } from "lucide-react";
 import {
   SidebarGroup,
@@ -46,6 +47,11 @@ export function NavMain() {
       title: "Tasks",
       url: `/workspace/${workspaceId}/tasks`,
       icon: CheckCircle,
+    },
+    {
+      title: "Timesheet",
+      url: `/workspace/${workspaceId}/timesheet`,
+      icon: Clock,
     },
     {
       title: "Members",
