@@ -274,8 +274,8 @@ export function TimesheetAnalyticsCharts({
                     ))}
                   </Pie>
                   <Tooltip
-                    formatter={(value: number, _name: string, props: any) => [
-                      formatDuration(value),
+                    formatter={(value: any, _name: any, props: any) => [
+                      formatDuration(value as number),
                       props.payload.name,
                     ]}
                   />

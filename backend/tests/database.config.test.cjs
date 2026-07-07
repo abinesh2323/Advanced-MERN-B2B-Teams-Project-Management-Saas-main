@@ -6,7 +6,7 @@ process.env.SESSION_EXPIRES_IN = '1d';
 process.env.GOOGLE_CLIENT_ID = 'test-client-id';
 process.env.GOOGLE_CLIENT_SECRET = 'test-client-secret';
 process.env.GOOGLE_CALLBACK_URL = 'http://localhost:8000/api/auth/google/callback';
-process.env.FRONTEND_ORIGIN = 'http://localhost:5173';
+process.env.FRONTEND_ORIGIN = 'https://officehubtech.onslate.com';
 process.env.FRONTEND_GOOGLE_CALLBACK_URL = 'http://localhost:5173/google/callback';
 
 const test = require('node:test');
@@ -26,7 +26,7 @@ test('connectDatabase does not exit the process when Mongo connection fails', as
     exitCode = code;
     throw new Error(`process.exit:${code}`);
   });
-  console.error = () => {};
+  console.error = () => { };
   mongoose.connect = async () => {
     throw new Error('simulated connection failure');
   };
